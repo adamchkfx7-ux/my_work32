@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لومي — أزياء راقية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <span class="logo-badge">L</span>
+        <span class="logo-text">لومي</span>
+      </a>
+      <nav class="nav">
+        <a href="#home">الرئيسية</a>
+        <a href="#products">المنتجات</a>
+        <a href="#features">لماذا نحن</a>
+        <a href="#testimonials">آراء العميلات</a>
+      </nav>
+      <button class="cart-btn" id="cartBtn" aria-label="عرض سلة الشراء">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 0-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Cart drawer ===== -->
+  <div class="cart-overlay" id="cartOverlay">
+    <div class="cart-scrim" id="cartScrim"></div>
+    <aside class="cart-drawer">
+      <div class="cart-head">
+        <h2>سلة الشراء</h2>
+        <button class="cart-close" id="cartClose" aria-label="إغلاق">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="cart-empty" id="cartEmpty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 0-8 0"/></svg>
+        <p>سلتك فارغة حالياً</p>
+        <button class="btn btn-dark" id="emptyShopBtn">تسوّق الآن</button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-foot" id="cartFoot" style="display:none">
+        <div class="cart-total">
+          <span>الإجمالي</span>
+          <span class="amount" id="cartTotal">0.00 ر.س</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">إتمام الطلب</button>
+        <button class="clear-btn" id="clearBtn">إفراغ السلة</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ===== Store view ===== -->
+  <main id="storeView">
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <img class="hero-bg" src="https://images.pexels.com/photos/5531709/pexels-photo-5531709.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="متجر لومي للأزياء">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <p class="hero-eyebrow">مجموعة خريف 2026 وصلت</p>
+        <h1>أناقة تُلهمك،<br>وثقة تُشبهك</h1>
+        <p>اكتشفي تشكيلة حصرية من الأزياء الراقية المختارة بعناية — جودة فاخرة، أسعار عادلة، وتوصيل مجاني لباب منزلك.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-gold">تسوّقي الآن</a>
+          <a href="#features" class="btn btn-outline">لماذا لومي؟</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust bar -->
+    <section class="trust">
+      <div class="container trust-grid">
+        <div class="trust-item"><strong>توصيل مجاني</strong><span>للطلبات فوق 300 ر.س</span></div>
+        <div class="trust-item"><strong>دفع عند الاستلام</strong><span>في جميع مدن المملكة</span></div>
+        <div class="trust-item"><strong>إرجاع مجاني</strong><span>خلال 14 يوماً</span></div>
+        <div class="trust-item"><strong>دعم واتساب</strong><span>من 9ص إلى 11م</span></div>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="section" id="featuredSection" style="display:none">
+      <div class="container">
+        <div class="featured-card">
+          <img id="featuredImg" src="" alt="">
+          <div class="featured-body">
+            <p class="featured-tag">منتج الأسبوع</p>
+            <h2 id="featuredName"></h2>
+            <p id="featuredDesc"></p>
+            <div class="featured-price">
+              <span class="new" id="featuredPrice"></span>
+              <span class="old" id="featuredOld"></span>
+            </div>
+            <div><button class="btn btn-dark" id="featuredAdd">أضيفيها لسلتك</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section" id="products">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">تسوّقي</p>
+          <h2>منتجاتنا المختارة</h2>
+        </div>
+        <div class="categories" id="categories"></div>
+        <div class="skeleton-grid" id="skeletons"></div>
+        <div class="products-grid" id="productsGrid" style="display:none"></div>
+        <div class="load-error" id="loadError" style="display:none">
+          تعذّر تحميل المنتجات. يرجى تحديث الصفحة والمحاولة مجدداً.
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section bg-white" id="features">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">لماذا نحن</p>
+          <h2>تجربة تسوّق تليق بك</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <h3>أقمشة مختارة بعناية</h3>
+            <p>نتعامل مع أفضل الموردين لنضمن جودة تدوم وملمساً فاخراً في كل قطعة.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <h3>توصيل سريع ومجاني</h3>
+            <p>نوصل طلبك خلال 2-4 أيام عمل مجاناً للطلبات فوق 300 ريال.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <h3>إرجاع بدون أسئلة</h3>
+            <p>لم يعجبك المقاس؟ أرجعيها خلال 14 يوماً واستعيدي مبلغك كاملاً.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">آراء العميلات</p>
+          <h2>ماذا قلن عنّا؟</h2>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>"جودة الأقمشة فوق التوقعات! الفستان وصلني خلال يومين وكان أفضل من الصور."</p>
+            <div class="testimonial-author">
+              <div class="avatar">ن</div>
+              <div>
+                <p class="author-name">نورة العتيبي</p>
+                <p class="author-city">الرياض</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>"خدمة العملاء راقية جداً، ساعدوني في اختيار المقاس عبر الواتساب بكل صبر."</p>
+            <div class="testimonial-author">
+              <div class="avatar">ر</div>
+              <div>
+                <p class="author-name">ريم الشمري</p>
+                <p class="author-city">جدة</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p>"طلبت 3 قطع وكلها رائعة. الدفع عند الاستلام أراحني كثيراً وصرت عميلة دائمة."</p>
+            <div class="testimonial-author">
+              <div class="avatar">د</div>
+              <div>
+                <p class="author-name">دانة القحطاني</p>
+                <p class="author-city">الدمام</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA band -->
+    <section class="cta-band">
+      <div class="cta-band-inner">
+        <h2>جاهزة لإطلالتك الجديدة؟</h2>
+        <p>انضمي لآلاف العميلات الراضيات واستمتعي بتوصيل مجاني وإرجاع سهل.</p>
+        <a href="#products" class="btn btn-gold">ابدئي التسوق الآن</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-logo">
+            <span class="logo-badge">L</span>
+            <span>لومي</span>
+          </div>
+          <p>متجر أزياء راقية يقدّم قطعاً مختارة بعناية لكل امرأة تبحث عن التميّز.</p>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <ul>
+            <li><a href="#products">المنتجات</a></li>
+            <li><a href="#features">لماذا نحن</a></li>
+            <li><a href="#testimonials">آراء العميلات</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>تواصلي معنا</h4>
+          <ul>
+            <li>واتساب: 01145174407</li>
+            <li>البريد: hello@lumi.sa</li>
+            <li> الاسكندريه شارع النصر </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 لومي. جميع الحقوق محفوظة.</div>
+    </footer>
+
+  </main>
+
+  <!-- ===== Checkout page ===== -->
+  <div class="checkout-page" id="checkoutPage">
+    <div class="container">
+      <a href="#" class="back-link" id="backLink"><span>→</span> متابعة التسوق</a>
+      <h1>إتمام الطلب</h1>
+      <div class="checkout-grid">
+        <form class="checkout-card" id="checkoutForm" novalidate>
+          <h2>بيانات التوصيل</h2>
+          <div class="form-group">
+            <label for="fName">الاسم الكامل</label>
+            <input type="text" id="fName" placeholder="مثال: سارة محمد">
+          </div>
+          <div class="form-group">
+            <label for="fPhone">رقم الجوال</label>
+            <input type="tel" id="fPhone" placeholder="05xxxxxxxx">
+          </div>
+          <div class="form-group">
+            <label for="fCity">المدينة</label>
+            <input type="text" id="fCity" placeholder="مثال: الرياض">
+          </div>
+          <div class="form-group">
+            <label for="fAddress">العنوان التفصيلي</label>
+            <textarea id="fAddress" rows="3" placeholder="الحي، الشارع، رقم المبنى"></textarea>
+          </div>
+          <div class="form-error" id="formError"></div>
+          <button type="submit" class="confirm-btn" id="confirmBtn">تأكيد الطلب</button>
+        </form>
+        <div class="checkout-card">
+          <h2>ملخص الطلب</h2>
+          <div id="summaryItems"></div>
+          <div class="summary-lines">
+            <div class="line"><span>المجموع الفرعي</span><span id="sumSubtotal">0.00 ر.س</span></div>
+            <div class="line"><span>التوصيل</span><span style="color:var(--success); font-weight:700">مجاني</span></div>
+            <div class="grand"><span>الإجمالي</span><span id="sumTotal">0.00 ر.س</span></div>
+          </div>
+          <div class="cod-note">الدفع عند الاستلام متاح في جميع المدن. سنتواصل معك هاتفياً لتأكيد الطلب قبل الشحن.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Empty cart page ===== -->
+  <div class="empty-cart-page" id="emptyCartPage">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:56px;height:56px;opacity:.4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 0-8 0"/></svg>
+    <h1 style="font-size:24px; font-weight:700">لا توجد منتجات في سلتك</h1>
+    <p style="color:var(--ink-500)">أضف بعض المنتجات الرائعة ثم عد لإتمام الطلب.</p>
+    <button class="btn btn-dark" id="emptyBackBtn">تسوّق الآن</button>
+  </div>
+
+  <!-- ===== Success page ===== -->
+  <div class="success-page" id="successPage">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h1>تم استلام طلبك بنجاح!</h1>
+    <p class="sub">شكراً لثقتك بنا. سيتواصل معك فريقنا خلال 24 ساعة لتأكيد الطلب وتحديد موعد التوصيل.</p>
+    <p class="order-id" id="orderId"></p>
+    <button class="btn btn-dark" id="successBackBtn">العودة للمتجر</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
